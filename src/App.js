@@ -1,28 +1,55 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Quote from './Quote'
 
 class App extends Component {
 
   state = {
-    title: "Steve O"
+    quotes: [
+      { quote: "Stuff is cool", votes: 0 },
+      { quote: "Fish is cool", votes: 4 },
+      { quote: "zch is for schmucks", votes: 14 }
+    ]
   }
 
+  addQuote() {
+    this.setState({
+      quotes: [
+        ...this.state.quotes,
+        { quote: "hey", vote: 1 }
+      ]
+    })
+  }
+
+
+  // make a reducer and test it
+
+    
+  
   render() {
 
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">{this.state.title}</h1>
-          {console.log(this)}
+          <h1 className="App-title">The Quote Wall</h1>
         </header>
-        <p className="App-intro" onClick={() => setState({title:"LOLO"})}>
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+
+        <ul>
+          {this.state.quotes.map((q,i)=> (
+            <Quote key={i} text={q.quote} votes={q.votes} />
+          ))}
+        </ul>
+
+        <button onClick={() => this.addQuote()}> Button </button> 
+
+
       </div>
     );
   }
 }
 
 export default App;
+
+
